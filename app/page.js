@@ -2,27 +2,34 @@
 import { useState } from "react";
 export default function Home() {
   const [entries, setEntries] = useState([
-    "Task 1: A Day in the life", // index 0
-    "Task 2: A Personal expierence", // index 1
-    "Task 3: A Bad day", // index 2
-    "Task 4: A Happy day", // index 3
-    "Task 5: A Brunch date", // index 4
+    "A Day in the life", // index 0
   ]);
+  const [draft, setDraft] = useState("");
+  const [selected, setSelected] = useState(null);
+
   return (
     <>
       <h1>Play Book</h1>
       <ul>
         {entries.map((entry, index) => (
-          <li key={index}>{entry}</li>
+          <li key={index} onClick={() => setSelected(entry)}>{entry}</li>
         ))}
       </ul>
+      <textarea value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Write today's entry..." />
       <button
-        onClick={() =>
-          setEntries([...entries, "TODO(you): pick a short test entry"])
-        }
+        onClick={() => {
+          setEntries([...entries, draft]);
+          setDraft("");
+        }}
       >
-        Add test entry
+        Save entry
       </button>
+      {selected && (
+        <div>
+          <h2>Selected entry:</h2>
+          <p>{selected}</p>
+        </div>
+      )}
     </>
   );
 }
