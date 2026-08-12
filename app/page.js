@@ -1,11 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export default function Home() {
-  const [entries, setEntries] = useState([
-    { text: "Sample Entry", date: "Jan 1, 2026" },
-  ]);
+  const [entries, setEntries] = useState([]);
   const [draft, setDraft] = useState("");
   const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    async function loadEntries() {
+      const res = await fetch("/api/entries");
+      const data = await res.json();
+      const formatted = data.map((row) => ({
+        text: row.text,
+        date: row.entry_date,
+      }));
+      setEntries(formatted);
+    }
+    loadEntries();
+  }, []);
 
   return (
     <>
@@ -26,11 +37,19 @@ export default function Home() {
             placeholder="whats on your mind..."
           />
           <button
-            onClick={() => {
-              setEntries([
-                ...entries,
-                { text: draft, date: new Date().toLocaleDateString("en-GB") },
-              ]);
+            onClick={async () => {
+              const newEntry = {
+                text: draft,
+                date: new Date().toLocaleDateString("en-GB"),
+              };
+
+              await fetch("/api/entries", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newEntry),
+              });
+
+              setEntries([...entries, newEntry]);
               setDraft("");
             }}
           >
