@@ -1,8 +1,8 @@
 body {
   font-family: sans-serif;
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 0 16px;
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 0 0px;
   background-color: #2c2222;
   color: #f0e6e6;
 }
@@ -11,10 +11,13 @@ li {
   cursor: pointer;
   padding: 8px;
   border-bottom: 1px solid #5a3232;
+  color: #f5e6c8;
 }
 
 li:hover {
-  background-color: #3d1f1f;
+  background-color: #f5e6c8;
+  color: #2b1414;
+  border-radius: 12px;
 }
 
 textarea {
@@ -24,7 +27,7 @@ textarea {
   padding: 8px;
   font-family: inherit;
   background-color: #3d1f1f;
-  color: #f0e6e6;
+  color: #f5e6c8;
   border: 1px solid #5a3232;
   border-radius: 6px;
 }
@@ -44,4 +47,41 @@ button {
 button:hover {
   background-color: #f5e6c8;
   color: #2b1414;
+}
+.container {
+  display: flex;
+  gap: 70px;
+  align-items: flex-start;
+}
+
+.list-section {
+  flex: 1;
+}
+
+.detail-section {
+  flex: 1;
+  height: 350px;
+  border: 1px solid #5a3232;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff3dc;
+  color: #2b1414;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+  color: #a89090;
+}
+
+.date {
+  display: flex;
+  height: 100%;
+  margin-top: -20px;
+  color: #a89090;
+  font-size: 14px;
 }
